@@ -16,7 +16,7 @@ class PageHP3Stylesheet extends Page
 	
 	if ( ! strstr($uri, '..') && file_exists($path) )
 	{
-	    $this->content_type = 'text/css';
+	    header('content-type: text/css');
 	    ECache::output($path);
 	    die;
 	}
