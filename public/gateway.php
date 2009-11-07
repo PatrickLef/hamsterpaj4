@@ -6,57 +6,103 @@
 		require_once '../classes/tools.class.php';
 		require_once '../config/paths.conf.php';
 
-		$daniella_include_file = PATH_CACHE . 'daniella_includes' . md5(PATH_ROOT) . '.php';
-		if(filemtime($daniella_include_file) < (time() - 300) || ENVIRONMENT != 'production' )
+		if ( ENVIRONMENT == 'production' )
 		{
-			// Needed files
-			$daniella_includes .= file_get_contents('../packages/daniella/classes/hp4.class.php');
-			$daniella_includes .= file_get_contents('../packages/daniella/classes/page.class.php');
-			$daniella_includes .= file_get_contents('../packages/side_modules/classes/module.class.php');
-			$daniella_includes .= file_get_contents('../classes/user.class.php');
-			$daniella_includes .= file_get_contents('../secrets/secret.class.php');
-			$daniella_includes .= file_get_contents('../secrets/db_config.php');
-
-			// Load all classes
-			$classes = Tools::fetch_files_from_folder(PATH_CLASSES);
-			foreach($classes as $class)
-			{
-				if(!in_array($class, array('tools.class.php','user.class.php')))
-				{
-					$daniella_includes .= file_get_contents(PATH_CLASSES . $class);
-				}
-			}
-			
-			// Load all package classes and package configs
-			$files = Tools::fetch_files_from_folder(PATH_PACKAGES);
-			foreach($files as $file)
-			{
-				if(substr($file, -10) == '.class.php' || substr($file, -9) == '.conf.php')
-				{
-					if(!in_array($file, array('daniella/classes/page.class.php','daniella/classes/hp4.class.php','side_modules/classes/module.class.php')))
-					{
-						$daniella_includes .= file_get_contents(PATH_PACKAGES . $file);
-					}
-				}
-			}
-			
-			// Load all configs
-			$configs = Tools::fetch_files_from_folder(PATH_CONFIGS);
-			foreach($configs as $config)
-			{
-				if (substr($config, -4) == '.php' )
-				{
-					$daniella_includes .= file_get_contents(PATH_CONFIGS . $config);
-				}
-			}
-			$daniella_includes_file = fopen($daniella_include_file, 'w');
-			fwrite($daniella_includes_file, $daniella_includes);
-			fclose($daniella_includes_file);
-			require $daniella_include_file;
+		    $daniella_include_file = PATH_CACHE . 'daniella_includes' . md5(PATH_ROOT) . '.php';
+		    if ( filemtime($daniella_include_file) < (time() - 300) )
+		    {
+			    // Needed files
+			    $daniella_includes .= file_get_contents('../packages/daniella/classes/hp4.class.php');
+			    $daniella_includes .= file_get_contents('../packages/daniella/classes/page.class.php');
+			    $daniella_includes .= file_get_contents('../packages/side_modules/classes/module.class.php');
+			    $daniella_includes .= file_get_contents('../classes/user.class.php');
+			    $daniella_includes .= file_get_contents('../secrets/secret.class.php');
+			    $daniella_includes .= file_get_contents('../secrets/db_config.php');
+    
+			    // Load all classes
+			    $classes = Tools::fetch_files_from_folder(PATH_CLASSES);
+			    foreach($classes as $class)
+			    {
+				    if(!in_array($class, array('tools.class.php','user.class.php')))
+				    {
+					    $daniella_includes .= file_get_contents(PATH_CLASSES . $class);
+				    }
+			    }
+			    
+			    // Load all package classes and package configs
+			    $files = Tools::fetch_files_from_folder(PATH_PACKAGES);
+			    foreach($files as $file)
+			    {
+				    if(substr($file, -10) == '.class.php' || substr($file, -9) == '.conf.php')
+				    {
+					    if(!in_array($file, array('daniella/classes/page.class.php','daniella/classes/hp4.class.php','side_modules/classes/module.class.php')))
+					    {
+						    $daniella_includes .= file_get_contents(PATH_PACKAGES . $file);
+					    }
+				    }
+			    }
+			    
+			    // Load all configs
+			    $configs = Tools::fetch_files_from_folder(PATH_CONFIGS);
+			    foreach($configs as $config)
+			    {
+				    if (substr($config, -4) == '.php' )
+				    {
+					    $daniella_includes .= file_get_contents(PATH_CONFIGS . $config);
+				    }
+			    }
+			    $daniella_includes_file = fopen($daniella_include_file, 'w');
+			    fwrite($daniella_includes_file, $daniella_includes);
+			    fclose($daniella_includes_file);
+			    require $daniella_include_file;
+		    }
+		    else
+		    {
+			    require $daniella_include_file;
+		    }
 		}
 		else
 		{
-			require $daniella_include_file;
+		    // Needed files
+		    require('../packages/daniella/classes/hp4.class.php');
+		    require('../packages/daniella/classes/page.class.php');
+		    require('../packages/side_modules/classes/module.class.php');
+		    require('../classes/user.class.php');
+		    require('../secrets/secret.class.php');
+		    require('../secrets/db_config.php');
+
+		    // Load all classes
+		    $classes = Tools::fetch_files_from_folder(PATH_CLASSES);
+		    foreach($classes as $class)
+		    {
+			    if(!in_array($class, array('tools.class.php','user.class.php')))
+			    {
+				    require(PATH_CLASSES . $class);
+			    }
+		    }
+		    
+		    // Load all package classes and package configs
+		    $files = Tools::fetch_files_from_folder(PATH_PACKAGES);
+		    foreach($files as $file)
+		    {
+			    if(substr($file, -10) == '.class.php' || substr($file, -9) == '.conf.php')
+			    {
+				    if(!in_array($file, array('daniella/classes/page.class.php','daniella/classes/hp4.class.php','side_modules/classes/module.class.php')))
+				    {
+					    require(PATH_PACKAGES . $file);
+				    }
+			    }
+		    }
+		    
+		    // Load all configs
+		    $configs = Tools::fetch_files_from_folder(PATH_CONFIGS);
+		    foreach($configs as $config)
+		    {
+			    if (substr($config, -4) == '.php' )
+			    {
+				    require(PATH_CONFIGS . $config);
+			    }
+		    }
 		}
 	
 		// Sanitize POST and GET data
@@ -268,7 +314,6 @@
 		// -- end HP3
 	
 		$page->user->lastaction();
-		$_SESSION = $page->user->to_session();
 
 		if (strlen($page->get('title')) == 0)
 		{
@@ -294,17 +339,21 @@
 		
 		if (strlen($page->get('redirect')) > 0)
 		{
+			$_SESSION = $page->user->to_session();
 			header('Location: ' . $page->get('redirect'));
 			exit;
 		}
 		elseif ($page->get('raw_output') === true)
 		{
+			$_SESSION = $page->user->to_session();
 			echo $page->content;
 		}
 		else
 		{
 			$template = Tools::pick($page->template, 'layouts/amanda.php');
 			$out = template('base', $template, array('page' => $page));
+			
+			$_SESSION = $page->user->to_session();
 			
 			if ( ENVIRONMENT == 'production' || ! DEBUG_SHOW )
 			{
@@ -322,7 +371,7 @@
 		echo '<div style="background: #fff; position: absolute; top: 0px; width: 100%; left: 0px; border: 3px solid red; overflow: auto;">';
 		echo '<h1>Oh noes! Error error abort abort! ABORT!</h1>';
 		echo '<p>' . $e->getMessage() . '</p>';
-		echo Tools::preint_r($e->getTrace());
+		//echo Tools::preint_r($e->getTrace());
 		echo '</div>';
 	}
 	catch (Exception $e)

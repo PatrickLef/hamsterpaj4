@@ -44,7 +44,8 @@
 			$privileges,
 			$geo_location,
 			$notifications = array(),
-			$live_chat;
+			$live_chat,
+			$recent_updates;
 		
 		protected $unread_gb_entries;
 		protected $unread_group_entries;
@@ -448,6 +449,44 @@
 			$this->update_notices();
 			return $this->forum['categories'];
 		}
+		
+		function get_recent_update()
+		{
+		    $this->recent_updates['queue'] = Tools::ensure_array($this->recent_updates['queue']);
+		    $this->recent_updates['threads'] = Tools::ensure_array($this->recent_updates['threads']);
+		    
+		    $data = Cache::load('latest_forum_threads');
+		    foreach ( $data as $thread )
+		    {
+			$id = $thread['id'];
+			
+			if ( $thread['timestamp'] > (time() - 300) && ! in_array($id, $this->recent_updates['threads']) )
+			{
+			    array_push($this->recent_updates['queue'],
+				array(
+				    'link' => $thread['url'],
+				    'text' => $thread['username'] . ' skapade precis tråden ' . $thread['title'],
+				    'views' => 5
+				)
+			    );
+			    
+			    $this->recent_updates['threads'][] = $id;
+			}
+		    }
+		    
+		    if ( count($this->recent_updates['queue']) )
+		    {
+			// Fetch latest
+			$latest = array_shift($this->recent_updates['queue']);
+			if ( --$latest['views'] > 0 )
+			{
+			    // Put it back for further use
+			    array_unshift($this->recent_updates['queue'], $latest);
+			}
+			return $latest;
+		    }
+		    return false;
+	    	}
 		
 		function notificate($params, $type = 'default')
 		{

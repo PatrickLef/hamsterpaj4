@@ -8,7 +8,7 @@
             $pieces = explode('/', $uri);
             $categories = array_keys($_ENTERTAIN['categories']);
             
-            if ( in_array($pieces[1], $categories) && $pieces[2] == 'slumpad' )
+            if ( count($pieces) >= 2 && in_array($pieces[1], $categories) && $pieces[2] == 'slumpad' )
             {
                 return 20;
             }

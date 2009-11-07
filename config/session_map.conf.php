@@ -53,4 +53,6 @@
 	
 	$session_map['forum'] = array('forum');
 	$session_map['live_chat'] = array('live_chat');
+	
+	$session_map['recent_updates'] = array('recent_updates');
 ?>

@@ -1,6 +1,6 @@
 hp.set('menu', {
     timers: {},
-    visible: {},
+    visible: null,
     
     // "Stolen" from jQuery source
     withElement: function(event, callback) {
@@ -22,6 +22,11 @@ hp.set('menu', {
     },
     
     on_over: function() {
+	if ( ! hp.menu.visible ) {
+	    var active_menu = $('#main_menu .active_menu');
+	    hp.menu.visible = {};
+	    hp.menu.visible[active_menu.attr('id')] = active_menu[0];
+	}
 	var li = $(this), key = li.attr('id');
 	// This element is hovered again, and should not disappear
 	hp.menu.timers[key] = clearTimeout(hp.menu.timers[key]);

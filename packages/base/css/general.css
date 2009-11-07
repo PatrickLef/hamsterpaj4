@@ -390,6 +390,19 @@ dd
 	padding-top: 15px;
 }
 
+#updates {
+    background: #D5E3FF;
+    padding: 10px 10px 10px 20px;
+    margin-left: -10px;
+    margin-bottom: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 10px;
+    border: 1px solid #B2CAFF;
+    color: #333;
+}
+
+    #updates p { margin: 0; }
+
 #content_container {
     _height: 1%;
     *display: inline-block;

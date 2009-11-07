@@ -12,12 +12,13 @@ class PageHP3Stylesheet extends Page
     public function execute($uri)
     {
 	$filename = str_replace('/stylesheets/', '', $uri);
-	$path = Tools::makePath('packages', 'hp3', 'css', $filename);
+	$path = PATH_PACKAGES . 'hp3/css/' . $filename;
 	
 	if ( ! strstr($uri, '..') && file_exists($path) )
 	{
 	    $this->content_type = 'text/css';
-	    $this->content = file_get_contents($path);
+	    ECache::output($path);
+	    die;
 	}
 	else
 	{
