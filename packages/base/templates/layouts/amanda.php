@@ -71,8 +71,14 @@
 				
 				<div id="content_container">
 				    <div id="content">
+					    <?php $update = $page->user->get_recent_update(); ?>
+					    <?php if ( $update ): ?>
+					    <div id="updates">
+						<p><a href="<?php echo $update['link']; ?>"><?php echo $update['text']; ?></a></p>
+					    </div>
+					    <?php endif; ?>
 					    <?php foreach ( $page->user->fetch_notifications() as $note ): ?>
-								<?php echo call_user_func_array('template', $note); ?>
+						<?php echo call_user_func_array('template', $note); ?>
 					    <?php endforeach; ?>
 					    
 					    <?php echo $page->content; ?>
@@ -87,6 +93,10 @@
 				</div>
 			</div>
 			<div id="column_ads">
+				<script type='text/javascript'><!--//<![CDATA[
+        Ads.insert(316, '');
+      //]]>--></script>
+
 				<script type='text/javascript'><!--//<![CDATA[
 					Ads.insert(251, '');
 					Ads.insert(252, '');

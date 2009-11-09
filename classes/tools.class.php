@@ -62,7 +62,7 @@
 			}
 			return $files;
 		}
-		
+
 		public static function cute_number($num)
 		{
 			return strrev(chunk_split(strrev($num), 3, ' '));
