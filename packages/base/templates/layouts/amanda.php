@@ -94,6 +94,10 @@
 			</div>
 			<div id="column_ads">
 				<script type='text/javascript'><!--//<![CDATA[
+        Ads.insert(316, '');
+      //]]>--></script>
+
+				<script type='text/javascript'><!--//<![CDATA[
 					Ads.insert(251, '');
 					Ads.insert(252, '');
 				//]]>--></script>
