@@ -195,7 +195,7 @@ class Legacy
 	{
 		global $_PDO;
 		
-	    	$query = 'SELECT id, unread_comments, description FROM user_photos WHERE user = :user_id AND unread_comments > 0';
+	    	$query = 'SELECT id, unread_comments, description FROM user_photos WHERE user = :user_id AND unread_comments > 0 AND deleted = 0';
 		
 		$stmt = $_PDO->prepare($query);
 		$stmt->bindValue(':user_id', $user->get('id'), PDO::PARAM_INT);
