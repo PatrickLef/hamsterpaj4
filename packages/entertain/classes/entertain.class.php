@@ -25,6 +25,90 @@
 			return template('entertain', 'previews_small.php', array('items' => $items));
 		}
 		
+		public static function previews_list($items)
+		{
+			return template('entertain', 'previews_list.php', array('items' => $items));
+		}
+		
+		public static function previews_grouped($items, $group_by)
+		{
+			switch($group_by)
+			{
+				case 'alphabetical':
+					foreach($items AS $item)
+					{
+						$letter = mb_substr($item->get('title'), 0, 1, 'UTF8');
+						$groups[$letter]['items'][] = $item;
+						$groups[$letter]['header'] = strtoupper($letter);
+					}
+				break;
+			
+				case 'views':
+					foreach($items AS $item)
+					{
+						if($item->get('views') < 1000)
+						{
+							$groups['-1000']['items'][] = $item;
+							$groups['-1000']['header'] = 'Färre än 1000 visningar';
+						}
+						elseif($item->get('views') < 5000)
+						{
+							$groups['1000-5000']['items'][] = $item;
+							$groups['1000-5000']['header'] = '1000 - 5000 visningar';
+						}
+						elseif($item->get('views') < 10000)
+						{
+							$groups['5000-10000']['items'][] = $item;
+							$groups['5000-10000']['header'] = '5000 - 10 000 visningar';
+						}
+						elseif($item->get('views') < 50000)
+						{
+							$groups['10000-50000']['items'][] = $item;
+							$groups['10000-50000']['header'] = '10000 - 50 000 visningar';
+						}
+						elseif($item->get('views') > 50000)
+						{
+							$groups['50000-']['items'][] = $item;
+							$groups['50000-']['header'] = 'Över 50 000 visningar';
+						}
+					}
+				break;
+				
+				case 'date':
+					foreach($items AS $item)
+					{
+						if($item->get('released_at') > 60*60*24)
+						{
+							$groups['1day']['items'][] = $item;
+							$groups['1day']['header'] = 'Senaste dygnet';
+						}
+						elseif($item->get('released_at') > 60*60*24*7)
+						{
+							$groups['1week']['items'][] = $item;
+							$groups['1week']['header'] = 'Senaste veckan';
+						}
+						elseif($item->get('released_at') >  60*60*24*7*31)
+						{
+							$groups['1month']['items'][] = $item;
+							$groups['1month']['header'] = 'Senaste månaden';
+						}
+						elseif($item->get('released_at') >  60*60*24*354)
+						{
+							$groups['1y']['items'][] = $item;
+							$groups['1y']['header'] = 'Senaste året';
+						}
+						elseif($item->get('released_at') <  60*60*24*7)
+						{
+							$groups['1y+']['items'][] = $item;
+							$groups['1y+']['header'] = 'Äldre än 1 år';
+						}
+					}
+				break;
+			}
+			
+			return template('entertain', 'previews_grouped.php', array('groups' => $groups));
+		}
+		
 		public static function categories()
 		{
 			global $_ENTERTAIN;
@@ -79,6 +163,7 @@
 			$query .= (isset($search['type'])) ? ' AND type = :type' : null;
 			$query .= (isset($search['ids'])) ? ' AND id IN ("' . implode('", "', $search['ids']) . '")' : null;
 			$query .= (isset($search['category'])) ? ' AND category = :category' : null;
+			$query .= (isset($search['released_within'])) ? ' AND released_at > :released_within' : null;
 			$query .= (isset($search['status'])) ? ' AND status = :status' : null;
 			$query .= (isset($search['order_by'])) ? ' ORDER BY ' . $search['order_by'] : null;
 			$query .= (isset($search['limit'])) ? ' LIMIT :limit' : null;
@@ -87,6 +172,7 @@
 			(isset($search['handle'])) ? $stmt->bindValue(':handle', $search['handle']) : null;
 			(isset($search['type'])) ? $stmt->bindValue(':type', $search['type']) : null;
 			(isset($search['category'])) ? $stmt->bindValue(':category', $search['category']) : null;
+			(isset($search['released_within'])) ? $stmt->bindValue(':released_within', $search['released_within']) : null;
 			(isset($search['status'])) ? $stmt->bindValue(':status', $search['status']) : null;
 			(isset($search['limit'])) ? $stmt->bindValue(':limit', $search['limit'], PDO::PARAM_INT) : null;
 			$stmt->execute();
