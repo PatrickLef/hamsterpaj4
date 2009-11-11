@@ -47,8 +47,6 @@
 	$session_map['notices'] = array('notices');
 	$session_map['notifications'] = array('notifications');
 	
-	$session_map['visitors_with_image'] = array('visitors_with_image');
-	
 	$session_map['unread_photo_comments'] = array('cache', 'unread_photo_comments');
 	
 	$session_map['forum'] = array('forum');
