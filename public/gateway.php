@@ -181,8 +181,6 @@
 					{
 						$page = new $class();
 						$top_match = $match;
-						
-						EventLog::log($class);
 					}
 				}
 			}
@@ -193,7 +191,6 @@
 		$page->user->from_session($_SESSION);
 		$page->load_side_modules();
 		$page->load_menu();
-		$page->logVisit();
 		$page->execute($uri);
 		
 		// -- start HP3
@@ -350,6 +347,7 @@
 		}
 		else
 		{
+			$page->logVisit();
 			$template = Tools::pick($page->template, 'layouts/amanda.php');
 			$out = template('base', $template, array('page' => $page));
 			
