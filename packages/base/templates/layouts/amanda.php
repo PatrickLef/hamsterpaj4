@@ -74,7 +74,7 @@
 					    <?php $update = $page->user->get_recent_update(); ?>
 					    <?php if ( $update ): ?>
 					    <div id="updates">
-						<p><a href="<?php echo $update['link']; ?>"><?php echo $update['text']; ?></a></p>
+						<p><?php if ( ! empty($update['link']) ): ?><a href="<?php echo $update['link']; ?>"><?php endif; ?><?php echo $update['text']; ?><?php if ( ! empty($update['link']) ): ?></a><?php endif; ?></p>
 					    </div>
 					    <?php endif; ?>
 					    <?php foreach ( $page->user->fetch_notifications() as $note ): ?>
