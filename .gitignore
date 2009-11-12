@@ -24,3 +24,11 @@ secrets/mobile_blog_config.php
 # Configuration files
 config/paths.conf.php
 config/environment.conf.php
+
+# Scripts
+pull.sh
+chmod.sh
+
+# Stylesheet/js
+public/stylesheet_cache.css
+public/javascript_cache.js

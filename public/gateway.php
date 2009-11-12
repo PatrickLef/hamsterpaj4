@@ -1,5 +1,4 @@
 <?php
-xdebug_start_trace();
 	@session_start();
 	define('IS_HP4', true);
 	try
@@ -377,5 +376,4 @@ xdebug_start_trace();
 	{
 		echo $e->getMessage();
 	}
-	xdebug_stop_trace();
 ?>
