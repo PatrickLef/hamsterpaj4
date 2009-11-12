@@ -11,7 +11,7 @@ class PageJS extends Page
 	
 	function execute($uri)
 	{
-		if ( ENVIRONMENT != 'development' && Cache::last_update('js') > (time() - 600))
+		if ( ENVIRONMENT != 'development')
 		{
 			header('Content-type: text/javascript');
 			ECache::output(Cache::get_name('js'));

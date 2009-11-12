@@ -8,7 +8,7 @@
 		
 		function execute($uri)
 		{
-			if ( ENVIRONMENT != 'development' && Cache::last_update('css') > (time() - 3600) )
+			if ( ENVIRONMENT != 'development' )
 			{
 				header('content-type: text/css');
 				ECache::output(Cache::get_name('css'));

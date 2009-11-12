@@ -1,4 +1,5 @@
 <?php
+xdebug_start_trace();
 	@session_start();
 	define('IS_HP4', true);
 	try
@@ -9,7 +10,7 @@
 		if ( ENVIRONMENT == 'production' )
 		{
 		    $daniella_include_file = PATH_CACHE . 'daniella_includes' . md5(PATH_ROOT) . '.php';
-		    if ( filemtime($daniella_include_file) < (time() - 300) )
+		    if ( !file_exists($daniella_include_file))
 		    {
 			    // Needed files
 			    $daniella_includes .= file_get_contents('../packages/daniella/classes/hp4.class.php');
@@ -376,4 +377,5 @@
 	{
 		echo $e->getMessage();
 	}
+	xdebug_stop_trace();
 ?>

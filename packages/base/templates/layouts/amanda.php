@@ -14,7 +14,11 @@
 		<link rel="image_src" href="http://images.hamsterpaj.net/fp_recent_update_thumb_universal.png" />
 		
 		<style type="text/css">
+			<?php if (ENVIRONMENT == 'development' || !file_exists(PATH_WEBROOT . 'stylesheet_cache.css')): ?>
 			@import url('/style.css');
+			<?php else: ?>
+			@import url('/stylesheet_cache.css');
+			<?php endif; ?>
 			<?php if ( IS_HP3_REQUEST ): ?>
 			@import url('/old_style.css:<?php echo implode(',', $page->extra_css); ?>');
 			<?php endif; ?>
@@ -27,8 +31,11 @@
 			return <?php echo (int)$page->user->exists(); ?>;
 		    };
 		</script>
-		<script src="/scripts.js" type="text/javascript"></script>
-
+		<?php if (ENVIRONMENT == 'development' || !file_exists(PATH_WEBROOT . 'javascript_cache.css')): ?>
+			<script src="/scripts.js" type="text/javascript"></script>
+		<?php else: ?>
+			<script src="/javascript_cache.js" type="text/javascript"></script>
+		<?php endif; ?>
 		<?php foreach ( Tools::pick($page->extra_js, array()) as $script ): ?>
 		<script type="text/javascript" src="http://iphone2.hamsterpaj.net/javascripts/<?php echo $script; ?>"></script>
 		<?php endforeach; ?>
