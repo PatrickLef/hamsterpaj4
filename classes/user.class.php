@@ -494,15 +494,21 @@
 		
 		function get_visitors()
 		{
-			if($this->id < 1)
+			if($this->exists() && count($this->visitors) == 0)
 			{
-				return false;
-			}
-			if(count($this->visitors) == 0)
-			{
-				$search = array('has_image' => true, 'has_visited' => $this->id, 'limit' => USER_VISITORS_LIMIT, 'order-by' => 'last_visit', 'order-direction' => 'DESC');
-				$params = array('allow_multiple' => true);
-				$this->visitors = User::fetch($search, $params);
+				global $_PDO;
+				$query = 'SELECT l.username, l.id, uv.timestamp AS last_visit FROM login AS l, user_visits AS uv WHERE l.id = uv.item_id AND uv.type = "profile_visit" AND uv.user_id = :user_id GROUP BY l.id ORDER BY last_visit DESC LIMIT 8';
+				$stmt = $_PDO->prepare($query);
+				$stmt->bindValue(':user_id', $this->id);
+				$stmt->execute();
+				while($data = $stmt->fetch(PDO::FETCH_ASSOC))
+				{
+					$user = new User;
+					$user->username = $data['username'];
+					$user->id = $data['id'];
+					$user->last_visit = $data['last_visit'];
+					$this->visitors[] = $user;
+				}
 			}
 			return $this->visitors;
 		}
