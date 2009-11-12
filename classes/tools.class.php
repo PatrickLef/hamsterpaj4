@@ -115,12 +115,16 @@
 			$log .= $file . "\n";
 			$log .= (is_string($message)) ? $message : print_r($message, true);
 			$log .= "\n\n\n";
-			$filename = PATH_DEBUG . date('Y-m-d') . '.log';
-			if ( ! file_exists($filename) )
+			
+			if(ENVIRONMENT == 'development')
 			{
-			    fclose(fopen($filename, 'x'));
+				$filename = PATH_DEBUG . date('Y-m-d') . '.log';
+				if ( ! file_exists($filename) )
+				{
+				    fclose(fopen($filename, 'x'));
+				}
+				file_put_contents($filename, $log, FILE_APPEND);
 			}
-			file_put_contents($filename, $log, FILE_APPEND);
 		}
 		
 		public static function timer($point)

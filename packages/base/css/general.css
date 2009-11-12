@@ -138,13 +138,6 @@ dd
 	position: relative;
 }
 
-#steve
-{
-    position: absolute;
-    top: -22px;
-    left: 855px;
-}
-
 #hp #head h2
 {
 	border-bottom: 0;
@@ -239,9 +232,15 @@ dd
 		#notices #notices_events a:hover { background-position: -210px -73px; color: #333; }
 		#notices li#notices_events.active a, #hp #head #notices li#notices_events.active a:hover { background-position: -210px -146px; color: #333;}
 
+	#notices li.notice_panel:hover {
+		position: relative;
+		z-index: 100;
+	}
+
 	#notices li.notice_panel:hover div.notices_information {
 		display: block;
 		position: relative;
+		z-index: 10;
 	}
 	
 	#notices li div.notices_information {
@@ -595,4 +594,28 @@ dd
 	text-align: center;
 	border: 1px solid #333;
 	color: #fff;
+    }
+
+/*
+    Steve
+*/
+
+#steve_say {
+    position: fixed;
+    top: 200px;
+    left: -500px;
+    background: #333;
+    border: 5px solid #000;
+    color: #fff;
+    padding: 20px;
+    z-index: 200;
+    -moz-box-shadow: 0px 0px 20px #888;
+}
+
+    #steve {
+	position: absolute;
+	top: 82px;
+	z-index: 1;
+	left: 855px;
+	cursor: pointer;
     }

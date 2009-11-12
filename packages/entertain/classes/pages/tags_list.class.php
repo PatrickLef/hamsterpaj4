@@ -52,9 +52,75 @@
 			// Search tip
 			$this->content .= template('base', 'notifications/tip.php', array('text' => 'Vet du om att du kan söka efter underhållning i den blå-vita rutan där det står "Sök underhållning" till höger? -->'));
 			
-			$items = Entertain::fetch(array('ids' => $items_id, 'allow_multiple' => true, 'status' => 'released', 'category' => $uri_explode[1]));
-			$this->content .= '<h1>Föremål med taggen: ' . $tag_title . '</h1>';
-			$this->content .= Entertain::item_list($items);
+			// Get display settings
+			$view = $_GET['view'];
+			
+			switch($_GET['order_by'])
+			{
+				case 'views':
+					$order_by = 'views DESC';
+				break;
+				
+				case 'date':
+					$order_by = 'released_at DESC';
+				break;
+				
+				case 'alphabetical':
+					$order_by = 'title ASC';
+				break;
+				
+				default:
+					$order_by = 'views DESC';
+			}
+			
+			switch($_GET['released_within'])
+			{
+				case 'one_day':
+					$released_within = time() - 60*60*24;
+				break;
+				
+				case 'one_week':
+					$released_within = time() - 60*60*24*7;
+				break;
+				
+				case 'one_month':
+					$released_within = time() - 60*60*24*31;
+				break;
+				
+				case 'one_year':
+					$released_within = time() - 60*60*24*365;
+				break;
+					
+				default:
+				$released_within = NULL;
+			}
+			
+			$items = Entertain::fetch(array('ids' => $items_id, 'allow_multiple' => true, 'status' => 'released', 'category' => $uri_explode[1], 'order_by' => $order_by, 'released_within' => $released_within));
+			
+			
+			$this->content .= '<h1>' . $category_label . ' med taggen ' . $tag_title . '</h1>';
+			$this->content .= template('entertain', 'list_menu.php', array('view' => $_GET['view'], 'order_by' => $_GET['order_by'], 'released_within' => $_GET['released_within']));
+			switch($_GET['view'])
+			{
+				case 'list':
+					$this->content .= Entertain::previews_list($items);
+				break;
+				
+				case 'group':
+					if(isset($_GET['order_by']))
+					{
+						$this->content .= Entertain::previews_grouped($items, $_GET['order_by']);
+					}
+					else
+					{
+						$this->content .= Entertain::previews_grouped($items, 'alphabetical');
+					}
+				break;
+				
+				default:
+					$this->content .= Entertain::previews($items);
+			}
+
 		}
 	}
 ?>

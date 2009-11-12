@@ -1,0 +1,14 @@
+.content_menu {
+	background: orange;
+	padding: 5px;
+}
+
+.content_menu ul {
+	padding: 0;
+	margin: 0;
+}
+
+.content_menu ul li {
+	display: inline;
+	margin-right: 20px;
+}
