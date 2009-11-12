@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=8" />
 		
 		<title><?php echo $page->get('title'); ?></title>
 		
@@ -32,7 +31,7 @@
 			return <?php echo (int)$page->user->exists(); ?>;
 		    };
 		</script>
-		<?php if (ENVIRONMENT == 'development' || !file_exists(PATH_WEBROOT . 'javascript_cache.css')): ?>
+		<?php if (ENVIRONMENT == 'development' || !file_exists(PATH_WEBROOT . 'javascript_cache.js')): ?>
 			<script src="/scripts.js" type="text/javascript"></script>
 		<?php else: ?>
 			<script src="/javascript_cache.js" type="text/javascript"></script>
@@ -82,7 +81,7 @@
 					    <?php $update = $page->user->get_recent_update(); ?>
 					    <?php if ( $update ): ?>
 					    <div id="updates">
-						<p><?php if ( ! empty($update['link']) ): ?><a href="<?php echo $update['link']; ?>"><?php endif; ?><?php echo $update['text']; ?><?php if ( ! empty($update['link']) ): ?></a><?php endif; ?></p>
+						<p><a href="<?php echo $update['link']; ?>"><?php echo $update['text']; ?></a></p>
 					    </div>
 					    <?php endif; ?>
 					    <?php foreach ( $page->user->fetch_notifications() as $note ): ?>
