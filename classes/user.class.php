@@ -4,7 +4,7 @@
 		// Die die die
 		public $last_action,
 			$last_logon,
-			$last_update,
+			$last_update = array(),
 			$signature,
 			$visitors,
 			$username,
@@ -45,7 +45,8 @@
 			$geo_location,
 			$notifications = array(),
 			$live_chat,
-			$recent_updates;
+			$recent_updates,
+			$friends_online;
 		
 		protected $unread_gb_entries;
 		protected $unread_group_entries;
@@ -118,7 +119,6 @@
 		
 		public function lastaction()
 		{
-			
 			$this->lastaction = time();
 			
 			// If user, save to database
@@ -137,13 +137,30 @@
 			}
 		}
 		
-		public function get_last_update()
+		public function get_last_update($section = null)
 		{
-		    if ( is_null($this->last_update) )
+		    if ( ! is_null($section) )
 		    {
-			$this->last_update = time();
+			if ( ! isset($this->last_update[$section]) )
+			{
+			    $this->last_update[$section] = 0;
+			}
+			return $this->last_update[$section];
 		    }
+		    
 		    return $this->last_update;
+		}
+		
+		public function set_last_update($section = null, $value = null)
+		{
+		    if ( ! is_null($section) && ! is_array($section) )
+		    {
+			$this->last_update[$section] = $value;
+		    }
+		    else
+		    {
+			$this->last_update = $section;
+		    }
 		}
 		
 		public static function fetch($search, $params = array())
@@ -339,7 +356,7 @@
 			return false;
 		    }
 		    
-		    $force_update = $this->get_last_update() < time() - 20;
+		    $force_update = $this->get_last_update('notices') < time() - 20;
 		    
 		    if ( ! isset($this->forum) || $force_update )
 		    {
@@ -373,7 +390,7 @@
 		    
 		    if ( $force_update )
 		    {
-			$this->last_update = time();
+			$this->set_last_update('notices', time());
 		    }
 		}
 		
@@ -396,6 +413,52 @@
 			$statement->execute();
 		    }
 		    $this->signature = $status;
+		}
+		
+		/*
+		    Friends
+		*/
+		
+		public function get_friends_online($update = false)
+		{
+		    if ( $update && $this->get_last_update('friends') < time() - 60 )
+		    {
+			global $_PDO;
+			
+			$query = 'SELECT f.friend_id AS user_id, l.username, l.lastaction, l.lastrealaction, u.user_status';
+			$query .= ' FROM friendslist AS f, login AS l, userinfo AS u';
+			$query .= ' WHERE f.user_id = :user_id AND l.id = f.friend_id AND u.userid = l.id AND is_removed = 0 AND l.lastaction > :last_action';
+			
+			$statement = $_PDO->prepare($query);
+			$statement->bindValue(':user_id', $this->get('id'), PDO::PARAM_INT);
+			$statement->bindValue(':last_action', time() - 600, PDO::PARAM_INT);
+			$statement->execute();
+			$friends = array();
+			
+			foreach ( $statement->fetchAll(PDO::FETCH_ASSOC) as $friend )
+			{
+			    $friends[$friend['user_id']] = $friend;
+			}
+			$new_friends = array_diff_assoc($friends, $this->friends_online);
+			
+			if ( count($new_friends) )
+			{
+			    foreach ( $new_friends as $key => $friend )
+			    {
+				$new_friends[$key] = sprintf('<a href="/traffa/profile.php?user_id=%d">%s</a>', $friend['user_id'], $friend['username']);
+			    }
+			    $links = implode(', ', $new_friends);
+			    
+			    $this->add_recent_update(array(
+				'text' => sprintf('%s har precis loggat in!', $links),
+				'views' => 4
+			    ));
+			}
+			
+			$this->friends_online = $friends;
+			$this->set_last_update('friends', time());
+		    }
+		    return $this->friends_online;
 		}
 		
 		public function auth($password)
@@ -462,11 +525,11 @@
 			
 			if ( $thread['timestamp'] > (time() - 300) && ! in_array($id, $this->recent_updates['threads']) )
 			{
-			    array_push($this->recent_updates['queue'],
+			    $this->add_recent_update(
 				array(
 				    'link' => $thread['url'],
 				    'text' => $thread['username'] . ' skapade precis tråden ' . $thread['title'],
-				    'views' => 5
+				    'views' => 4
 				)
 			    );
 			    
@@ -487,6 +550,11 @@
 		    }
 		    return false;
 	    	}
+		
+		public function add_recent_update($options)
+		{
+		    array_push($this->recent_updates['queue'], $options);
+		}
 		
 		function notificate($params, $type = 'default')
 		{
