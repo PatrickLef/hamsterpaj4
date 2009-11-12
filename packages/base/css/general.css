@@ -1,6 +1,6 @@
 body
 {
-	background: #8ec0e5 url(http://static.hamsterpaj.net/images/layouts/amanda/repeat-x-sprites.png) repeat-x 0 -241px;
+	background: #8ec0e5 url("http://static.hamsterpaj.net/images/packages/base/layouts/amanda/sprites.png") repeat-x 0 -287px;
 	font-family: tahoma, arial, "ms trebuchet", sans-serif, serif;
 	color: #323232;
 	font-size: 0.7em;
@@ -214,7 +214,7 @@ dd
 		width: 70px;
 		height: 23px;
 		padding-top: 50px;
-		color: #717171;
+		color: #535353;
 	}
 	
 	#notices li a:hover { color: #333; }

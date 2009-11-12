@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
 		
 		<title><?php echo $page->get('title'); ?></title>
 		
@@ -81,7 +82,7 @@
 					    <?php $update = $page->user->get_recent_update(); ?>
 					    <?php if ( $update ): ?>
 					    <div id="updates">
-						<p><a href="<?php echo $update['link']; ?>"><?php echo $update['text']; ?></a></p>
+						<p><?php if ( ! empty($update['link']) ): ?><a href="<?php echo $update['link']; ?>"><?php endif; ?><?php echo $update['text']; ?><?php if ( ! empty($update['link']) ): ?></a><?php endif; ?></p>
 					    </div>
 					    <?php endif; ?>
 					    <?php foreach ( $page->user->fetch_notifications() as $note ): ?>
