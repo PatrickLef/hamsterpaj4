@@ -369,12 +369,29 @@ dd
 	float: left;
 }
 
+#hp #head #status {
+	position: relative;
+}
+
 #hp #head #status .user_avatar
 {
 	width: 45px;
 	height: 58px;
 	float: left;
 	margin-right: 10px;
+}
+
+#hp #head #status .change_avatar {
+	position: absolute;
+	top: 7px;
+	left: 0;
+	display: none;
+	width: 45px;
+	background: #333;
+	color: #fff;
+	opacity: 0.7;
+	font-size: 8px;
+	text-align: center;
 }
 
 #content
