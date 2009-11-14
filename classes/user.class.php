@@ -497,7 +497,7 @@
 			if($this->exists() && count($this->visitors) == 0)
 			{
 				global $_PDO;
-				$query = 'SELECT l.username, l.id, uv.timestamp AS last_visit FROM login AS l, user_visits AS uv WHERE l.id = uv.item_id AND uv.type = "profile_visit" AND uv.user_id = :user_id GROUP BY l.id ORDER BY last_visit DESC LIMIT 8';
+				$query = 'SELECT l.username, l.id, uv.timestamp AS last_visit FROM login AS l, user_visits AS uv, userinfo as u WHERE l.id = uv.item_id AND u.userid = l.id AND uv.type = "profile_visit" AND uv.user_id = :user_id AND (u.image = 1 OR u.image = 2) GROUP BY l.id ORDER BY last_visit DESC LIMIT 8';
 				$stmt = $_PDO->prepare($query);
 				$stmt->bindValue(':user_id', $this->id);
 				$stmt->execute();
