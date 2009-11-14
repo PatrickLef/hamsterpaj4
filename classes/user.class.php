@@ -521,41 +521,41 @@
 		
 		function get_recent_update()
 		{
-		    $this->recent_updates['queue'] = Tools::ensure_array($this->recent_updates['queue']);
-		    $this->recent_updates['threads'] = Tools::ensure_array($this->recent_updates['threads']);
+			$this->recent_updates['queue'] = Tools::ensure_array($this->recent_updates['queue']);
+			$this->recent_updates['threads'] = Tools::ensure_array($this->recent_updates['threads']);
 		    
-		    $data = Cache::load('latest_forum_threads');
-		    foreach ( $data as $thread )
-		    {
+			$data = Cache::load('latest_forum_threads');
+			$thread = array_pop($data);
+
 			$id = $thread['id'];
 			
-			if ( $thread['timestamp'] > (time() - 300) && ! in_array($id, $this->recent_updates['threads']) )
+			if ( $thread['timestamp'] > (time() - 300) && ! in_array($thread['id'], $this->recent_updates['threads']) )
 			{
-			    $this->add_recent_update(
-				array(
-				    'link' => $thread['url'],
-				    'text' => $thread['username'] . ' skapade precis tråden ' . $thread['title'],
-				    'views' => 4
-				)
-			    );
+				$this->add_recent_update(
+					array(
+				   	'link' => $thread['url'],
+				 		'text' => $thread['username'] . ' skapade precis tråden ' . $thread['title'],
+				   	'views' => 2
+					)
+			  );
 			    
-			    $this->recent_updates['threads'][] = $id;
+			  $this->recent_updates['threads'][] = $thread['id'];
 			}
-		    }
 		    
-		    if ( count($this->recent_updates['queue']) )
-		    {
-			// Fetch latest
-			$latest = array_shift($this->recent_updates['queue']);
-			if ( --$latest['views'] > 0 )
-			{
-			    // Put it back for further use
-			    array_unshift($this->recent_updates['queue'], $latest);
-			}
-			return $latest;
-		    }
-		    return false;
-	    	}
+		   if ( count($this->recent_updates['queue']) )
+		   {
+					// Fetch latest
+					$latest = array_shift($this->recent_updates['queue']);
+					if ( --$latest['views'] > 0 )
+					{
+			  	  // Put it back for further use
+			  	  array_unshift($this->recent_updates['queue'], $latest);
+					}
+					return $latest;
+		   }
+		   
+		   return false;
+	  }
 		
 		public function add_recent_update($options)
 		{
