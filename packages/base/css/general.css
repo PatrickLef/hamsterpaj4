@@ -345,6 +345,10 @@ dd
 	color: #717171;
 }
 
+* html #hp #head #status {
+	width: 200px;
+}
+
 #hp #head #status a {
 	color: #333;
 }
@@ -445,8 +449,14 @@ dd
 	-webkit-border-top-left-radius: 8px;
 	-webkit-border-bottom-left-radius: 8px;
 	width: 200px;
-	margin-left: 660px;
+	/*margin-left: 660px;*/
 	padding: 10px 10px 1px;
+	float: right;
+}
+
+* html #hp #modules
+{
+	padding: 10px 5px 0;
 }
 
 #hp #modules .module

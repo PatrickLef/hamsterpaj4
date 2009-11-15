@@ -35,7 +35,7 @@ hp.set('packages.steve', {
     
     show_box: function(callback) {
 	this.box.css({
-	    left: $(window).width() / 2 - this.box.width() / 2,
+	    left: $('#content_container').width() / 2 - this.box.width() / 2,
 	    opacity: 1
 	});
 	this.box.animate({
