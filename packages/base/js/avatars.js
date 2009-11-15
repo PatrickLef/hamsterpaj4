@@ -7,6 +7,13 @@ hp.set('packages.avatars', {
 	
 	$(document).ready(function() {
 	    self.create_base();
+	    
+	    var link = $('#status .change_avatar');
+	    $('#status').hover(function() {
+		link.slideDown('fast');
+	    }, function(e) {
+		link.slideUp('fast');
+	    });
 	});
 	
 	$(document).click(function(event) {
