@@ -71,6 +71,13 @@
 	z-index: 100;
 }
 
+.entertain_div .content
+{
+	width: 638px;
+	text-align: center;
+	clear: both;
+}
+
 .entertain_div .info
 {
 	float: left;
