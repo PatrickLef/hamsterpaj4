@@ -11,13 +11,7 @@ class PageJS extends Page
 	
 	function execute($uri)
 	{
-		if ( ENVIRONMENT != 'development')
-		{
-			header('Content-type: text/javascript');
-			ECache::output(Cache::get_name('js'));
-			exit;
-		}
-		
+	
 		$files = Tools::find_files(PATH_PACKAGES, array('extension' => 'js'));
 		
 		// Files that have to be loaded before the restore_error_handler
@@ -39,10 +33,7 @@ class PageJS extends Page
 			    );
 			}
 		}
-		if ( ENVIRONMENT != 'development' )
-		{
-		    Cache::save('js', $this->content, false);
-		}
+
 		$this->raw_output = true;
 	}
 }
