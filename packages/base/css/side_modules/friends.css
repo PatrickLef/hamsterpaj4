@@ -1,0 +1,22 @@
+#side_module_friends ul {
+    margin: 0;
+    padding: 0 20px;
+}
+
+    #side_module_friends li {
+	display: inline;
+    }
+
+#side_module_friends p.online {
+    text-align: left;
+}
+
+#side_module_friends p.show_all {
+   text-align: right;
+}
+
+#side_module_friends p {
+   margin: 0;
+   padding: 0 0 3px 0;
+   text-align: center;
+}

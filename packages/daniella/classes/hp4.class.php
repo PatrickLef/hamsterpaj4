@@ -18,11 +18,14 @@
 		}
 	
 		public function get($var)
-		{
+		{	
 			$function = 'get_' . $var;
 			if( is_callable(array($this, $function)) )
 			{
-				return $this->$function();
+				$args = func_get_args();
+				$args = array_slice($args, 1);
+				
+				return call_user_func_array(array($this, $function), $args);
 			}
 			else
 			{
