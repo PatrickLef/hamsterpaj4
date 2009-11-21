@@ -1,22 +1,17 @@
 <?php
 	class FeedPostHamsternytt extends FeedPost
 	{
-		static function fetch($options = NULL)
+		function __construct($post = NULL)
 		{
-			global $_PDO;
-			$query = 'SELECT * FROM entertain LIMIT 20';
-			$stmt = $_PDO->prepare($query);
-			$stmt->execute();
-			
-			while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+			if($post != NULL)
 			{
-				$item = new FeedPostHamsternytt;
-				$item->data = $row;
-				$item->timestamp = $row['timestamp'];
-				$item->title = 'hej';
-				$items[] = $item;
+				$this->item_id = $post['id'];
+				$this->timestamp = $post['timestamp'];
+				$this->type = 'Hamsternytt';
+				$this->data = $post;
+				$this->keys = array('hamsternytt');
+				$this->save();
 			}
-			return $items;
 		}
 		
 		function render($options)
