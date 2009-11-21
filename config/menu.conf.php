@@ -70,11 +70,12 @@ $menu['admin_priveleges'] = array('parent' => 'admin', 'label' => 'Privilegier',
 $menu['admin_contact_info'] = array('parent' => 'admin', 'label' => 'OV kontaktinfo', 'url' => '/admin/moderator_contact_info.php', 'privileges' => array('warnings_admin'));
 
 // Old site admin menu
-$menu['site_admin'] = array('label' => 'S', 'priority' => '109', 'url' => '/site_admin/event_log.php', 'privileges' => array('fp_modules_rearrange','use_statistic_tools','discussion_forum_category_admin','use_debug_tools'));
+$menu['site_admin'] = array('label' => 'S', 'priority' => '109', 'url' => '/site_admin/event_log.php', 'privileges' => array('fp_modules_rearrange','schedule_admin','use_statistic_tools','discussion_forum_category_admin','use_debug_tools'));
 $menu['site_admin_frontpage'] = array('parent' => 'site_admin', 'label' => 'Ordna startsidan', 'url' => '/site_admin/fp_module_list.php', 'privileges' => array('fp_modules_rearrange'));
 $menu['site_admin_statistics'] = array('parent' => 'site_admin', 'label' => 'Statistik', 'url' => '/site_admin/event_log.php', 'privileges' => array('use_statistic_tools'));
 $menu['site_admin_forum_admin'] = array('parent' => 'site_admin', 'label' => 'Forum admin', 'url' => '/site_admin/discussion_forum_admin.php', 'privileges' => array('discussion_forum_category_admin'));
 $menu['site_admin_handy'] = array('parent' => 'site_admin', 'label' => 'Handy', 'url' => '/site_admin/handy.php', 'privileges' => array('use_debug_tools'));
 $menu['site_admin_view_session'] = array('parent' => 'site_admin', 'label' => 'Sessionsdata', 'url' => '/site_admin/view_session.php', 'privileges' => array('use_debug_tools'));
+$menu['site_admin_schemalagt'] = array('parent' => 'site_admin', 'label' => 'Schemalagt', 'url' => '/site_admin/schemalagt.php', 'privileges' => array('schedule_admin'));
 
 ?>
