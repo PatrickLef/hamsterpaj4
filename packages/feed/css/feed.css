@@ -1,0 +1,27 @@
+.feed {
+	border-top: 1px solid #ccc;
+	background: #e7e7e7;
+	padding: 0;
+}
+
+.feed li {
+	border-bottom: 1px solid #ccc;
+	list-style-type: none;
+	margin: 0;
+	padding: 3px;
+}
+
+.feed .odd {
+	background: #f6f6f6;
+}
+
+.feed li .info {
+	float: left;
+	width: 80px;
+}
+
+.feed li .content {
+	margin-left: 80px;
+	padding-left: 5px;
+	border-left: 1px solid #ccc;
+}

@@ -363,6 +363,8 @@
 					Tools::debug($stmt->errorInfo());
 				}
 			}
+			
+			new FeedPostEntertain($this);
 		}
 		
 		function remove()
