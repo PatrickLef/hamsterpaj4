@@ -91,3 +91,9 @@
 #searchform .item {
 	padding: 3px;
 }
+
+
+    #side_module_search .suggestions .active div,
+    #searchform .suggestions .active div {
+	background: #c2d6ff;
+    }

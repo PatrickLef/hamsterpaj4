@@ -69,9 +69,8 @@
 
 	/* This provides an alternative style for IE 6 active, which was buggy. */
 	* html #main_menu li.active_menu a.direct_child {
-		height: 19px;
 		font-weight: bold;
-		background: url("http://static.hamsterpaj.net/images/packages/base/layouts/amanda/sprites.png") 0 -166px repeat-x; 
+		background: url("http://static.hamsterpaj.net/images/packages/base/layouts/amanda/menu_whereat.png") center; 
 	}
 
 .main_menu_sub { 

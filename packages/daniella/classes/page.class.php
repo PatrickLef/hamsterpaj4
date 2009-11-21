@@ -30,6 +30,7 @@
 			$modules['forum_posts'] = new SideModuleForumPosts();
 			$modules['crew'] = new SideModuleCrew();
 			$modules['administration'] = new SideModuleAdministration($this->get('user'));
+			$modules['friends'] = new SideModuleFriends($this->get('user'));
 			
 			// Module ordering
 			$all_modules = array_keys($modules);

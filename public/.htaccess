@@ -38,6 +38,8 @@ RewriteRule ^camprock.flv$ camprock.php
 
 #RewriteRule (.*) http://www.hamsterpaj.se/$1 [R=302,L]
 
+RewriteRule stylesheet_cache.[0-9]*.css stylesheet_cache.css [L]
+RewriteRule javascript_cache.[0-9]*.js javascript_cache.js [L]
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

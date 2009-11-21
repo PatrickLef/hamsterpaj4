@@ -439,7 +439,7 @@
 			{
 			    $friends[$friend['user_id']] = $friend;
 			}
-			$new_friends = array_diff_assoc($friends, $this->friends_online);
+			/*$new_friends = array_diff_assoc($friends, $this->friends_online);
 			
 			if ( count($new_friends) )
 			{
@@ -453,7 +453,7 @@
 				'text' => sprintf('%s har precis loggat in!', $links),
 				'views' => 4
 			    ));
-			}
+			}*/
 			
 			$this->friends_online = $friends;
 			$this->set_last_update('friends', time());
