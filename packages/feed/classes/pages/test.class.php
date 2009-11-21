@@ -16,13 +16,7 @@
 			$stmt->execute();
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC))
 			{
-				$feed_post = new FeedPostHamsternytt;
-				$feed_post->type = 'Hamsternytt';
-				$feed_post->timestamp = $row['timestamp'];
-				$feed_post->item_id = $row['id'];
-				$feed_post->keys = array('hamsternytt');
-				$feed_post->data = $row;
-				$feed_post->create();
+				new FeedPostHamsternytt($row);
 			}
 			*/
 			/*$items = Entertain::fetch(array('status' => 'released', 'order_by' => 'released_at DESC', 'allow_multiple' => true));
