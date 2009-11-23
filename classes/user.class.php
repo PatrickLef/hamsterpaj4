@@ -316,7 +316,7 @@
 		public function get_unread_gb_entries()
 		{
 			$this->update_notices();
-			return count($this->unread_gb_entries);
+			return $this->unread_gb_entries;
 		}
 		
 		public function get_unread_group_entries()
@@ -356,7 +356,7 @@
 			return false;
 		    }
 		    
-		    $force_update = $this->get_last_update('notices') < time() - 20;
+		    $force_update = $this->get_last_update('notices') < time() - 50;
 		    
 		    if ( ! isset($this->forum) || $force_update )
 		    {
@@ -364,7 +364,11 @@
 			$this->forum = Legacy::fetch_forum_notices($this);
 		    }
 		    
-		    if ( ! isset($this->groups_members) || $force_update )
+		    if ( ! isset($this->unread_group_entries) && ! $force_update)
+		    {
+			$this->unread_group_entries = $this->cache['unread_group_notices'];
+		    }
+		    elseif ( ! isset($this->groups_members, $this->cache, $this->groups_members) || $force_update )
 		    {
 			// Groups
 			$entries = Legacy::fetch_group_notices($this);
