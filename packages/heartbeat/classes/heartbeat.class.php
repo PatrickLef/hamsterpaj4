@@ -56,13 +56,15 @@ class PageHeartbeat extends Page
 	    return self::$hooks;
 	}
 	
-	$hooks = Tools::find_files(PATH_PACKAGES, array('endswith' => '.beat.php'));
+	$path = PATH_PACKAGES . 'heartbeat/hooks/';
+	
+	$hooks = Tools::find_files($path, array('endswith' => '.beat.php'));
 	$ret = array();
 	
 	foreach ( $hooks as $hook )
 	{
 	    $ret[] = preg_replace('#([A-Za-z0-9-_]+)\.beat\.php#', '$1', Tools::last(explode('/', $hook)));
-	    include(PATH_PACKAGES . $hook);
+	    include($path . $hook);
 	}
 	
 	self::$hooks = $ret;
