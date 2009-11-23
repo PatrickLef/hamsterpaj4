@@ -59,7 +59,6 @@
 				Ads.insert(250, 'banner980x120 noprint');
 			//]]>--></script>
 			
-		
 			<div id="hp">
 				<div id="head">
 				<img id="steve" src="http://images.hamsterpaj.net/steve/steve.gif" alt="" />
@@ -157,6 +156,6 @@
 		} catch(err) {}</script>
 
 	 	<!-- Kiaindex -->
-    <img src="http://sifomedia.nyheter24.se/RealMedia/ads/adstream_nx.ads/nyheter24/123645@TopRight?XE&Sajt=hamsterpaj&Grupp1=nyheter24natverket&XE" border="0" alt="" />		
+		<img src="http://sifomedia.nyheter24.se/RealMedia/ads/adstream_nx.ads/nyheter24/123645@TopRight?XE&Sajt=hamsterpaj&Grupp1=nyheter24natverket&XE" border="0" alt="" />		
 	</body>
 </html>
