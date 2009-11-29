@@ -356,7 +356,7 @@
 			return false;
 		    }
 		    
-		    $force_update = $this->get_last_update('notices') < time() - 50;
+		    $force_update = $this->get_last_update('notices') < time() - 40;
 		    
 		    if ( ! isset($this->forum) || $force_update )
 		    {
@@ -383,7 +383,7 @@
 		    {
 			// Guestbook
 			$search = array('recipient' => $this->id, 'force_unread' => true, 'allow_private' => true, 'get_removed' => false);
-			$this->unread_gb_entries = Guestbook::fetch($search);
+			$this->unread_gb_entries = count(Guestbook::fetch($search));
 		    }
 		    
 		    if ( ! isset($this->unread_photo_comments) || $force_update )

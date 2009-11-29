@@ -1,9 +1,9 @@
 <div id="notices">
 	<ul>
-		<?php $class = (count($user->get('unread_gb_entries')) > 0) ? ' active"' : ''; ?>
+		<?php $class = ($user->get('unread_gb_entries') > 0) ? ' active"' : ''; ?>
 		<li class="notice_panel<?php echo $class; ?>" id="notices_guestbook">
 			<a class="notice_icon" href="/traffa/guestbook.php?user_id=3">
-			    <?php echo String::plural(count($user->get('unread_gb_entries')), 'Gästbok', '1 ny', '%d nya'); ?>
+			    <?php echo String::plural($user->get('unread_gb_entries'), 'Gästbok', '1 ny', '%d nya'); ?>
 			</a>
 		</li>
 		
