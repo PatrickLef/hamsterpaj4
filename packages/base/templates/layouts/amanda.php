@@ -46,14 +46,6 @@
 	</head>
 	
 	<body>
-		<!-- Adwell crap -->
-		<script type="text/javascript">
-			var uri = 'http://anet.tradedoubler.com/anet?type(js)loc(55632)' + new
-			String (Math.random()).substring (2, 11);
-			document.write('<sc'+'ript type="text/javascript" src="'+uri+'"'
-			+ 'charset="UTF-8"></sc'+'ript>');
-		</script>
-		
 		<div id="wrapper">
 			<script type='text/javascript'><!--//<![CDATA[
 				Ads.insert(250, 'banner980x120 noprint');
@@ -109,14 +101,7 @@
 					Ads.insert(252, '');
 				//]]>--></script>
 			
-				<!-- Adwell crap -->
-				<script type="text/javascript">
-					var uri = 'http://anet.tradedoubler.com/anet?type(js)loc(55633)' + new
-					String (Math.random()).substring (2, 11);
-					document.write('<sc'+'ript type="text/javascript" src="'+uri+'" charset="UTF-8"></sc'+'ript>');
-				</script>
-			
-					<script type="text/javascript"><!--
+				<script type="text/javascript"><!--
 					google_ad_client = "pub-3110640362329253";
 					/* hamsterpaj 160x600, skapad 2009-06-08 */
 					google_ad_slot = "0695149486";
@@ -126,7 +111,7 @@
 					</script>
 					<script type="text/javascript"
 					src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-					</script>
+				</script>
 			</div>
 
 		</div>
