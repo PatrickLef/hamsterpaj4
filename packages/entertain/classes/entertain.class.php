@@ -15,9 +15,9 @@
 			$this->save();
 		}
 		
-		public static function previews($items, $show_ad = false)
+		public static function previews($items)
 		{
-			return template('entertain', 'previews.php', array('items' => $items, 'show_ad' => $show_ad));
+			return template('entertain', 'previews.php', array('items' => $items));
 		}
 		
 		public static function previews_small($items)

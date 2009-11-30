@@ -13,7 +13,9 @@
 </div>
 
 <div class="entertain_related">
-	<?php echo Entertain::previews($related, true); ?>
+	<?php echo Entertain::previews($related); ?>
 </div>
+
+<object width="468" height="263"><param name="movie" value="http://media.moltoman.com/player.swf?id=638&ref=hamsterpaj"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://media.moltoman.com/player.swf?id=638&ref=hamsterpaj" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="468" height="263"></embed></object>
 
 <?php echo $big_related->preview_full(); ?>
