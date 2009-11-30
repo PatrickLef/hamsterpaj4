@@ -3,7 +3,7 @@
 	<?php foreach($module->visitors AS $visitor) : ?>
 		<li class="visitor_<?php echo $counter++; ?>">
 			<a href="<?php echo $visitor->get('profile_url'); ?>" title="<?php echo $visitor->get('username'); ?> besökte dig <?php echo Tools::date_readable($visitor->get('last_visit')); ?>">
-			<img src="<?php echo ($_SESSION['login']['username'] == 'LordDanne') ?  'http://images.hamsterpaj.net/lorddanne.jpg' : $visitor->avatar_thumb_url(); ?>" />
+			<img src="<?php echo (false && $_SESSION['login']['username'] == 'LordDanne') ?  'http://images.hamsterpaj.net/lorddanne.jpg' : $visitor->avatar_thumb_url(); ?>" />
 			</a>
 		</li>
 	<?php endforeach; ?>

@@ -34,6 +34,7 @@
 	$session_map['privileges'] = array('privilegies');
 	
 	$session_map['groups'] = array('groups_members');
+	$session_map['groups_members'] = array('groups_members');
 	
 	$session_map['preferences'] = array('preferences');
 	$session_map['photoblog_preferences'] = array('photoblog_preferences');
@@ -50,6 +51,7 @@
 	$session_map['visitors_with_image'] = array('visitors_with_image');
 	$session_map['friends_online'] = array('userinfo', 'friends_online');
 	$session_map['unread_photo_comments'] = array('cache', 'unread_photo_comments');
+	$session_map['unread_gb_entries'] = array('notices', 'unread_gb_entries');
 	
 	$session_map['forum'] = array('forum');
 	$session_map['live_chat'] = array('live_chat');

@@ -212,6 +212,16 @@ class Legacy
 	
 	public static function discussion_forum_categories_fetch($options)
 	{
+		if ( $options['parent'] == 0 && Cache::last_update('discussion_forum_categories') > time() - 6000 )
+		{
+		    $categories = Cache::load('discussion_forum_categories');
+		    
+		    if ( $categories )
+		    {
+			return $categories;
+		    }
+		}
+		
 		global $_PDO;
 		
 		$options['url_prefix'] = (isset($options['url_prefix'])) ? $options['url_prefix'] : '/diskussionsforum/';
@@ -261,7 +271,7 @@ class Legacy
 			
 			$categories[] = $data;
 		}
-		
+		Cache::save('discussion_forum_categories', $categories);
 		return $categories;
 	}
 }

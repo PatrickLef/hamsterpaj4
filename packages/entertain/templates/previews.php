@@ -1,5 +1,5 @@
 <ul class="entertain_preview">
-	<?php foreach($items AS $item) : ?>
+	<?php foreach($items AS $item): ?>
 		<li>
 			<a href="<?php echo $item->get('url'); ?>">
 				<img src="<?php echo $item->preview_image('medium'); ?>"  alt="<?php echo Entertain::get_category_label($item->category) . ': ' .$item->get('title'); ?>" />
