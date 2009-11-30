@@ -1,5 +1,8 @@
 <ul class="entertain_preview">
-	<?php foreach($items AS $item) : ?>
+	<li style="height: 263px;">
+	    <object width="468" height="263"><param name="movie" value="http://media.moltoman.com/player.swf?id=638&ref=hamsterpaj"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://media.moltoman.com/player.swf?id=638&ref=hamsterpaj" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="468" height="263"></embed></object>
+	</li>
+	<?php $i = 0; foreach($items AS $item): if ( $i++ > 2 ) continue; ?>
 		<li>
 			<a href="<?php echo $item->get('url'); ?>">
 				<img src="<?php echo $item->preview_image('medium'); ?>"  alt="<?php echo Entertain::get_category_label($item->category) . ': ' .$item->get('title'); ?>" />
