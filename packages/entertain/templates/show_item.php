@@ -13,7 +13,7 @@
 </div>
 
 <div class="entertain_related">
-	<?php echo Entertain::previews($related); ?>
+	<?php echo Entertain::previews($related, true); ?>
 </div>
 
 <?php echo $big_related->preview_full(); ?>
