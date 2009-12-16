@@ -46,6 +46,14 @@
 	</head>
 	
 	<body>
+		<?php
+		if(isset($page->user->user_message))
+	  {
+	    echo jscript_alert($page->user->user_message);
+	    unset($page->user->user_message);
+	  }
+		?>
+
 		<div id="wrapper">
 			<script type='text/javascript'><!--//<![CDATA[
 				Ads.insert(250, 'banner980x120 noprint');
