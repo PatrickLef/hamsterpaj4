@@ -6,6 +6,7 @@
 	height: 161px;
 	overflow: hidden;
 	clear: left;
+	position: relative;
 }
 
 .profile_head .avatar_passepartout
@@ -26,7 +27,7 @@
 
 .profile_head .name_asl
 {
-	font-size: 16px;
+	font-size: 15px;
 	padding: 3px 0 3px 0;
 }
 
@@ -48,6 +49,10 @@
 .profile_head .user_action_log
 {
 	list-style-type: none;
+	position: absolute;
+	top: 60px;
+	left: 120px;
+	padding: 0 !important;
 }
 
 .profile_head .navigation
