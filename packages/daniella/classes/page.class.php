@@ -22,15 +22,11 @@
 		
 		function load_side_modules()
 		{
-			$modules['search'] = new SideModuleSearch();
-			$modules['n24'] = new SideModuleN24();
-			$modules['profile_visitors'] = new SideModuleProfileVisitors($this->get('user'));
-			$modules['statistics'] = new SideModuleStatistics();
-			$modules['forum_threads'] = new SideModuleForumThreads();
-			$modules['forum_posts'] = new SideModuleForumPosts();
-			$modules['crew'] = new SideModuleCrew();
-			$modules['administration'] = new SideModuleAdministration($this->get('user'));
-			$modules['friends'] = new SideModuleFriends($this->get('user'));
+			global $side_modules;
+			foreach($side_modules as $key => $module)
+			{
+				$modules[$key] = new $module['class']($this->get('user'));
+			}
 			
 			// Module ordering
 			$all_modules = array_keys($modules);
