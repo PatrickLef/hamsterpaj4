@@ -47,7 +47,7 @@
 				$stmt->bindValue(':user_id', $user->id); 
 				$stmt->bindValue(':settings', serialize($this->settings));
 				$stmt->bindValue(':handle', $handle);
-					
+				$stmt->execute();
 			}
 			else
 			{

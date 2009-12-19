@@ -25,6 +25,7 @@ class PageSideModulesEdit extends Page
     	if(!$this->user->exists())
     	{
     		$this->content = '<h2>Du måste vara inloggad för att komma åt den här sidan</h2>';
+    		return false;
     	}
     	
     	if(!$this->content = $module->edit($this->user))
