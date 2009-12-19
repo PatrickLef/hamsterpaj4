@@ -10,8 +10,15 @@
 	{
 		public static function load($handle)
 		{
-			$serialized = file_get_contents(PATH_CACHE . $handle . '.phpserialized');
-			return unserialize($serialized);
+			if(file_exists(PATH_CACHE . $handle . '.phpserialized'))
+			{
+				$serialized = file_get_contents(PATH_CACHE . $handle . '.phpserialized');
+				return unserialize($serialized);
+			}
+			else
+			{
+				return false;
+			}
 		}
 		
 		public static function get_name($handle)
