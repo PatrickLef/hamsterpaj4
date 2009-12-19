@@ -58,5 +58,7 @@
 	
 	$session_map['recent_updates'] = array('recent_updates');
  $session_map['user_message'] = array('user_message');
+ 
+ $session_map['module_forum_posts_settings'] = array('module_forum_posts_settings');
 
 ?>
