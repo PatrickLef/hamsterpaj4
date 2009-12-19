@@ -103,7 +103,7 @@
 					}
 				}
 				$this->save($user);
-				//header('Location: ' . $_SERVER['REQUEST_URI']);
+				header('Location: ' . $_SERVER['REQUEST_URI']);
 			}
 			
 			return template('base', 'side_modules/edit/' . $this->edit_template . '.php', array('forums' => $forums, 'choosed_forums' => $this->settings->choosed_forums));
