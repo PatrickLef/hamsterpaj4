@@ -60,5 +60,6 @@
  $session_map['user_message'] = array('user_message');
  
  $session_map['module_forum_posts_settings'] = array('module_forum_posts_settings');
+ $session_map['module_forum_threads_settings'] = array('module_forum_threads_settings');
 
 ?>

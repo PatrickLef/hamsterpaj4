@@ -1,6 +1,6 @@
 <?php
 		
-	function cmp($a, $b)
+	function forum_posts_cmp($a, $b)
 	{
 	 	if ($a['last_post_timestamp'] == $b['last_post_timestamp'])
 	 	{
@@ -42,7 +42,7 @@
 					}
 				}
 				
-				uasort($threads, 'cmp');
+				uasort($threads, 'forum_posts_cmp');
 				$threads = array_splice($threads, 0,8);
 			}
 			

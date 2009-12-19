@@ -60,7 +60,8 @@
 				$stmt->execute();
 			}
 			
-			$user->module_forum_posts_settings = serialize($this->settings);
+			$session_id = 'module_' . $handle . '_settings';
+			$user->$session_id = serialize($this->settings);
 		}
 	}
 ?>

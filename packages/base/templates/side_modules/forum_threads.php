@@ -1,5 +1,9 @@
 <?php $counter = new Counter('odd', 'even'); ?>
-<a class="minimize" href="#">+</a><h5>Nya tr&aring;dar</h5><a class="move" href="#">=</a>
+<a class="minimize" href="#">+</a><h5>Nya tr&aring;dar</h5>
+<?php if ( $page->user->exists() ): ?>
+<a class="edit" href="/sidmodul/forum_threads">+</a>
+<?php endif; ?>
+<a class="move" href="#">=</a>
 <ul>
 	<?php foreach($module->threads as $thread) : ?>
 		<li class="<?php echo $counter; ?>">
