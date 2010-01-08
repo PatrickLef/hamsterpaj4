@@ -1,7 +1,7 @@
 <?php
 
 // Old hamsterpaj menu
-$menu['hamsterpaj'] = array('label' => 'Knasterpaj', 'priority' => '150', 'url' => '/');
+$menu['hamsterpaj'] = array('label' => 'Hamsterpaj', 'priority' => '150', 'url' => '/');
 $menu['hamsterpaj_nyheter'] = array('parent' => 'hamsterpaj', 'label' => 'Hamsternytt', 'url' => '/hamsterpaj/hamsterblogg.php');
 $menu['hamsterpaj_om_hamsterpaj'] = array('parent' => 'hamsterpaj', 'label' => 'Om Hamsterpaj', 'url' => '/hamsterpaj/about.php');
 $menu['hamsterpaj_annonsera'] = array('parent' => 'hamsterpaj', 'label' => 'Annonsera', 'url' => '/hamsterpaj/annonsera.php');
